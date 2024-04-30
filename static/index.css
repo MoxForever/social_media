@@ -11,6 +11,10 @@ body {
     height: 100vh;
 }
 
+.mb {
+    margin-bottom: 20px;
+}
+
 .container {
     box-shadow: 0 0 41px -11px rgba(0,0,0,0.25);
     border-radius: 10px;
@@ -23,7 +27,6 @@ body {
 .container h1 {
     white-space: nowrap;
     font-size: 32px;
-    margin-bottom: 20px;
 }
 
 .container .nav {
@@ -32,7 +35,7 @@ body {
     gap: 10px;
 }
 
-.container a {
+.container .btn {
     text-decoration: none;
     background-color: blue;
     color: white;
