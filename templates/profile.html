@@ -6,42 +6,38 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-              <link rel="stylesheet" href="/static/profile.css">
+        <link rel="stylesheet" href="/static/index.css">
+        <link rel="stylesheet" href="/static/profile.css">
     </head>
     <body>
         <div class="container">
-            <img src="https://trikky.ru/wp-content/blogs.dir/1/files/2023/03/23/zyro-image-11.jpg">
+            <img src="{{ avatar_url }}">
             <div class="about">
-                <h1>Имя</h1>
-                <p>О себе</p>
-                <button>Настройка</button>
+                <h1> {{ name }} </h1>
+                {% if about %}
+                    <p> {{ about }} </p>
+                {% else %}
+                    <p>Напишите о себе</p>
+                {% endif %}
+                <a href="/settings" class="btn">Настройки</a>
             </div>
         </div>
         <div class="articles">
-            <div class="container article">
-                <p>ЕТРЕ ТЕ ТЕТЕН ЕТНЕНТЕГЕ ТРЕРЕ</p>
-                <h6>19:49</h6>
-                <div>
-                    <button>Лайк</button>
-                    <button>Комментарий</button>
+            <form class="container article new-post" method="POST" enctype="multipart/form-data" action="/profile">
+                <label for="text">Новый пост</label>
+                <textarea id="text" name="text" placeholder="Введите ваш пост" rows="7"></textarea>
+                <input type="file" name="file">
+                <button>Потвердить</button>
+            </form>
+            {% for post in posts %}
+                <div class="container article">
+                    {% if post.img_url %}
+                        <img src="{{ post.img_url }}">
+                    {% endif %}
+                    <p>{{ post.text }}</p>
+                    <h6>{{ post.date }}</h6>
                 </div>
-            </div>
-            <div class="container article">
-                <p>ЕТРЕ ТЕ ТЕТЕН ЕТНЕНТЕГЕ ТРЕРЕ</p>
-                <h6>19:49</h6>
-                <div>
-                    <button>Лайк</button>
-                    <button>Комментарий</button>
-                </div>
-            </div>
-            <div class="container article">
-                <p>ЕТРЕ ТЕ ТЕТЕН ЕТНЕНТЕГЕ ТРЕРЕ</p>
-                <h6>19:49</h6>
-                <div>
-                    <button>Лайк</button>
-                    <button>Комментарий</button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </body>
 </html>

@@ -9,31 +9,35 @@
            <link rel="stylesheet" href="/static/settings.css">
     </head>
     <body>
-        <form class="container">
+        <form class="container" method="POST" enctype="multipart/form-data" action="/settings/profile">
             <h1>Профиль</h1>
             <div class="item">
                 <label for="nickname"> Никнейм </label>
-                <input type="text" id="nickname" name="nickname">
+                <input type="text" id="nickname" name="nickname" value="{{ nickname }}">
             </div>
             <div class="item">
                 <label for="email"> Email </label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" value="{{email}}">
             </div>
             <div class="item">
                 <label for="avatar"> Аватарка </label>
                 <input type="file" id="avatar" name="avatar">
             </div>
+            <div class="item">
+                <label for="about"> О себе </label>
+                <textarea id="about" name="about" rows="7">{{about}}</textarea>
+            </div>
             <button type="submit"> Обновить </button>
         </form>
-        <form class="container">
+        <form class="container" method="POST" action="/settings/password">
             <h1>Безопасность</h1>
             <div class="item">
                 <label for="password"> Пароль </label>
                 <input type="password" id="password" name="password">
             </div>
             <div class="item">
-                <label for="password-confirm"> Потвердить пароль </label>
-                <input type="password" id="password-confirm" name="password-confirm">
+                <label for="password_confirm"> Потвердить пароль </label>
+                <input type="password" id="password_confirm" name="password_confirm">
             </div>
             <button type="submit"> Обновить </button>
         </form>
