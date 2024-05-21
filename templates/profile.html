@@ -8,34 +8,42 @@
         <title>Document</title>
         <link rel="stylesheet" href="/static/index.css">
         <link rel="stylesheet" href="/static/profile.css">
+        <script src="/static/images.js"></script>
     </head>
     <body>
+        <a href="/" style="font-size: 24px; margin-left: 30vw;">На главную</a>
         <div class="container">
-            <img src="{{ avatar_url }}">
+            {% if user.avatar_url %}
+                <img src="{{ user.avatar_url }}">
+            {% endif %}
             <div class="about">
-                <h1> {{ name }} </h1>
-                {% if about %}
-                    <p> {{ about }} </p>
+                <h1> {{ user.username }} </h1>
+                {% if user.about %}
+                    <p> {{ user.about }} </p>
                 {% else %}
                     <p>Напишите о себе</p>
                 {% endif %}
-                <a href="/settings" class="btn">Настройки</a>
+                {% if is_own_page %}
+                    <a href="/settings" class="btn">Настройки</a>
+                {% endif %}
             </div>
         </div>
         <div class="articles">
-            <form class="container article new-post" method="POST" enctype="multipart/form-data" action="/profile">
-                <label for="text">Новый пост</label>
-                <textarea id="text" name="text" placeholder="Введите ваш пост" rows="7"></textarea>
-                <input type="file" name="file">
-                <button>Потвердить</button>
-            </form>
+            {% if is_own_page %}
+                <form class="container article new-post" method="POST" enctype="multipart/form-data" action="/profile">
+                    <label for="text">Новый пост</label>
+                    <textarea id="text" name="text" placeholder="Введите ваш пост" rows="7"></textarea>
+                    <input type="file" name="file">
+                    <button>Потвердить</button>
+                </form>
+            {% endif %}
             {% for post in posts %}
                 <div class="container article">
                     {% if post.img_url %}
                         <img src="{{ post.img_url }}">
                     {% endif %}
                     <p>{{ post.text }}</p>
-                    <h6>{{ post.date }}</h6>
+                    <h6>{{ post.date.strftime("%Y-%m-%d %H:%M") }}</h6>
                 </div>
             {% endfor %}
         </div>

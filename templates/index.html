@@ -13,5 +13,15 @@
                 <a href="/register" class="btn">Регистрация</a>
             </div>
         </div>
+        <div class="container" style="display: flex; gap: 8px; align-items: end">
+            {% for i in users %}
+                <a href="/profile/{{ i.username }}">
+                    {% if i.avatar_url %}
+                        <img src="{{ i.avatar_url }}" width="64">
+                    {% endif %}
+                    <h3>{{ i.username }}</h3>
+                </a>
+            {% endfor %}
+        </div>
     </body>
 </html>
